@@ -9,7 +9,7 @@ app.get("/", () => {
 });
 
 const createUserSchema = z.object({
-  email: z.string().email(),
+  email: z.string().email({ message: "Insira um endereço de email valido" }),
   nome: z.string(),
   senha: z.string(),
   apelido: z.string(),
@@ -33,7 +33,7 @@ app.post("/usuario", async (req, res) => {
   } catch (error) {
     console.log(error);
     if (error instanceof Error) {
-      res.status(400).send("Algum campo esta faltando");
+      res.status(400).send(error.message);
     } else {
       res.status(500).send("Erro interno do servidor");
     }
