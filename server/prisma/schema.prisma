@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,12 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id            Int       @id @default(autoincrement())
-  email         String    @unique
-  senha         String
+model equipamento {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.Text
+  atributo atributo[]
+}
+
+model atributo {
+  id            Int          @id @default(autoincrement())
   nome          String
-  apelido       String
-  criadoEm      DateTime  @default(now())
-  fotoPerfil    String?   // URL ou caminho do arquivo da imagem de perfil
+  valor         String
+  equipamento   equipamento? @relation(fields: [equipamentoId], references: [id])
+  equipamentoId Int?
+}
+
+model user {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique(map: "User_email_key")
+  senha      String
+  nome       String
+  apelido    String
+  criadoEm   DateTime @default(now())
+  fotoPerfil String?
 }
