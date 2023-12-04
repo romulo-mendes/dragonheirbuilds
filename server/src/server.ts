@@ -4,4 +4,4 @@ const app = fastify()
 
 app.get("/",()=>{return "Test"})
 
-app.listen({ port: 3000}).then(()=>{console.log("Server running")});
+app.listen({ port: 3000}).then(()=>{console.log("Server running now...")});
