@@ -1,7 +1,6 @@
 import fastify from "fastify";
 import { prisma } from "./prisma";
 import { z } from "zod";
-import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
 const app = fastify();
